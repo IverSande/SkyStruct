@@ -16,8 +16,13 @@ public class EndToEnd
 
         var parser = new Parser.Parser(tokens);
         var ast = parser.Parse();
+
+        var codeGenerator = new CodeGenerator.Builder(ast, "HolyNamespace");
+        var code = codeGenerator.BuildFile();
+
+        var fileGenerator = new FileGenerator.FileGenerator();
+        fileGenerator.GenerateFile(code, "FileName.cs");
         
-        Assert.IsNotNull(ast);
         return Task.CompletedTask;
     }
     

@@ -96,12 +96,12 @@ public class Lexer
     
     private Token? RecognizeToken(string value)
     {
-        if (IsWhitespace(value))
+        if (IsThrowAway(value))
             return null;
         return IsKeyword(value) ? new Token(TokenType.Keyword, value) : new Token(TokenType.Identifier, value);
     }
     
-    private bool IsWhitespace(string value) =>
+    private bool IsThrowAway(string value) =>
         value == "\r" || value == "\n";
     
     private bool IsKeyword(string value) =>
