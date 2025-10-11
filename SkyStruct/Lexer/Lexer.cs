@@ -41,7 +41,7 @@ public class Lexer
                             tokenValue.Add(currentChar);
                             break;
                         default :
-                            _currentState = LexerState.Identifier; // Assuming it's an identifier/keyword start
+                            _currentState = LexerState.Identifier; 
                             tokenValue.Add(currentChar);
                             break;
                     }
@@ -52,6 +52,7 @@ public class Lexer
                     if (!char.IsWhiteSpace(currentChar))
                     {
                         _currentState = LexerState.Default;
+                        tokenValue.Add(currentChar);
                     }
                     break;
                 
@@ -62,7 +63,9 @@ public class Lexer
                     }
                     else
                     {
-                        yield return RecognizeToken(new string(tokenValue.ToArray()));
+                        var token = RecognizeToken(new string(tokenValue.ToArray()));
+                        if(token is not null)
+                            yield return token;
                         tokenValue.Clear();
                         _currentState = LexerState.Default;
                     }
@@ -85,18 +88,23 @@ public class Lexer
         if (tokenValue.Count > 0)
         {
             var idToken = new string(tokenValue.ToArray());
-            yield return RecognizeToken(idToken);
+            yield return RecognizeToken(idToken)!;
         }
     
         yield return new Token(TokenType.EndOfInput, "END");
     }
     
-    private static Token RecognizeToken(string value)
+    private Token? RecognizeToken(string value)
     {
+        if (IsWhitespace(value))
+            return null;
         return IsKeyword(value) ? new Token(TokenType.Keyword, value) : new Token(TokenType.Identifier, value);
     }
     
-    private static bool IsKeyword(string value) =>
+    private bool IsWhitespace(string value) =>
+        value == "\r" || value == "\n";
+    
+    private bool IsKeyword(string value) =>
         value == "Define" || value == "inherits";
     
 }

@@ -11,4 +11,23 @@
       <Folder Include="Parser\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MSTest.TestFramework" Version="4.0.0" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
+      <PackageReference Include="MSTest.TestAdapter" Version="4.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Files\TestFile.skystruct" />
+      <EmbeddedResource Include="Files\TestFile.skystruct">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="SkyStruct">
+        <HintPath>..\SkyStruct\bin\Debug\net10.0\SkyStruct.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>

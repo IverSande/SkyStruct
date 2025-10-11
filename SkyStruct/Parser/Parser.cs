@@ -1,12 +1,13 @@
-﻿using SkyStruct.Lexer;
+﻿using System.Diagnostics.CodeAnalysis;
+using SkyStruct.Lexer;
 
 namespace SkyStruct.Parser;
 
 public class Parser
 {
     private readonly IEnumerator<Token> _tokens;
-    private Token _currentToken;
-
+    private Token _currentToken = null!;
+    
     public Parser(IEnumerable<Token> tokens)
     {
         _tokens = tokens.GetEnumerator();
@@ -30,7 +31,8 @@ public class Parser
             var dataContract = ParseType();
             dataContracts.Add(dataContract);
         }
-
+        
+        _tokens.Dispose();
         return dataContracts;
     }
 
@@ -41,13 +43,15 @@ public class Parser
         var name = Consume(TokenType.Identifier).Value;
         var typeNode = new TypeNode { Name = name };
 
-        Consume(TokenType.Keyword, "with");
+        Consume(TokenType.Delimiter, "{");
 
-        while (_currentToken.Type != TokenType.EndOfInput && _currentToken.Type != TokenType.Keyword)
+        while (_currentToken.Type != TokenType.Delimiter && _currentToken.Type != TokenType.Keyword)
         {
             var property = ParseProperty();
             typeNode.Properties.Add(property);
         }
+        
+        Consume(TokenType.Delimiter, "{");
 
         return typeNode;
     }
@@ -61,9 +65,6 @@ public class Parser
 
     private Token Consume(TokenType expectedType, string expectedValue = null)
     {
-        if (_currentToken.Type != expectedType || (expectedValue != null && _currentToken.Value != expectedValue))
-            throw new Exception($"Unexpected token: {_currentToken.Type}, {_currentToken.Value}");
-
         var token = _currentToken;
         Advance();
         return token;

@@ -1,0 +1,8 @@
+﻿Define Person { 
+    Text Name 
+    Number Age 
+} 
+Define Employee { 
+    Text EmployeeID 
+    Text Title 
+} 
