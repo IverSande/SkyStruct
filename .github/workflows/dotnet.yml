@@ -22,11 +22,8 @@ jobs:
       with:
         dotnet-version: 10.0.x
     - name: Restore dependencies
-      working-directory: ./Skystruct.Tests
       run: dotnet restore
     - name: Build
-      working-directory: ./Skystruct.Tests
       run: dotnet build --no-restore
     - name: Test
-      working-directory: ./Skystruct.Tests
       run: dotnet test --no-build --verbosity normal

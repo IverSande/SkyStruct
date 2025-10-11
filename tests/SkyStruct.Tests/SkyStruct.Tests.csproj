@@ -7,11 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Lexer\" />
-      <Folder Include="Parser\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="MSTest.TestFramework" Version="4.0.0" />
       <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
       <PackageReference Include="MSTest.TestAdapter" Version="4.0.0" />
@@ -22,12 +17,20 @@
       <EmbeddedResource Include="Files\TestFile.skystruct">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
+      <EmbeddedResource Remove="Parser\**" />
+      <None Remove="Parser\**" />
+      <EmbeddedResource Remove="Lexer\**" />
+      <None Remove="Lexer\**" />
     </ItemGroup>
 
     <ItemGroup>
       <Reference Include="SkyStruct">
         <HintPath>..\SkyStruct\bin\Debug\net10.0\SkyStruct.dll</HintPath>
       </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\SkyStruct\SkyStruct.csproj" />
     </ItemGroup>
 
 </Project>
