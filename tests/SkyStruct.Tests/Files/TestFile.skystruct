@@ -3,7 +3,9 @@
     Number Age 
 } 
 
-Define Employee { 
+Define Employee is Person { 
     Text EmployeeID 
     Text Title 
-} 
+    Decimal Salary
+    Person Boss
+}

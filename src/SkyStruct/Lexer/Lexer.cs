@@ -21,7 +21,6 @@ public class Lexer
 
         while ((intChar = _input.Read()) != -1)
         {
-            
             var currentChar = (char) intChar;
             
             switch (_currentState)
@@ -39,6 +38,10 @@ public class Lexer
                         case '}' : 
                             _currentState = LexerState.EndType;
                             tokenValue.Add(currentChar);
+                            break;
+                        case '\r':
+                            break;
+                        case '\n':
                             break;
                         default :
                             _currentState = LexerState.Identifier; 
@@ -67,15 +70,17 @@ public class Lexer
                         if(token is not null)
                             yield return token;
                         tokenValue.Clear();
+                        if(IsDelimiter(currentChar))
+                            tokenValue.Add(currentChar);
                         _currentState = LexerState.Default;
                     }
                     break;
-                case LexerState.EndType:
+                case LexerState.StartType:
                     _currentState = LexerState.Default;
-                    yield return new Token(TokenType.Delimiter, new string(tokenValue.ToArray())) ;
+                    yield return new Token(TokenType.Delimiter, new string(tokenValue.ToArray()));
                     tokenValue.Clear();
                     break;
-                case LexerState.StartType:
+                case LexerState.EndType:
                     _currentState = LexerState.Default;
                     yield return new Token(TokenType.Delimiter, new string(tokenValue.ToArray()));
                     tokenValue.Clear();
@@ -88,7 +93,9 @@ public class Lexer
         if (tokenValue.Count > 0)
         {
             var idToken = new string(tokenValue.ToArray());
-            yield return RecognizeToken(idToken)!;
+            var token = RecognizeToken(idToken);
+            if(token is not null)
+                yield return token;
         }
     
         yield return new Token(TokenType.EndOfInput, "END");
@@ -104,7 +111,10 @@ public class Lexer
     private bool IsThrowAway(string value) =>
         value == "\r" || value == "\n";
     
+    private bool IsDelimiter(char value) =>
+        value == '{' || value == '}';
+    
     private bool IsKeyword(string value) =>
-        value == "Define" || value == "inherits";
+        value == "Define" || value == "is";
     
 }

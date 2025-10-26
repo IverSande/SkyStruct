@@ -6,7 +6,7 @@ public class TypeNode : AstNode
 {
     public required string Name { get; set; }
     public List<PropertyNode> Properties { get; set; } = []; 
-    public string Parent { get; set; } = null!;
+    public string? InheritedType { get; set; }
 }
 
 public class PropertyNode : AstNode

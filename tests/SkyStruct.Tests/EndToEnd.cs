@@ -21,8 +21,8 @@ public class EndToEnd
         var code = codeGenerator.BuildFile();
 
         var fileGenerator = new FileGenerator.FileGenerator();
-        fileGenerator.GenerateFile(code, "FileName.cs");
-        
+        fileGenerator.GenerateFile(code, "TestFileGenerated.cs");
+
         return Task.CompletedTask;
     }
     

@@ -38,10 +38,17 @@ public class Parser
 
     private TypeNode ParseType()
     {
+        //Should always be the start of a type
         Consume(TokenType.Keyword, "Define");
-
         var name = Consume(TokenType.Identifier).Value;
         var typeNode = new TypeNode { Name = name };
+
+        if (CheckNextToken() is (TokenType.Keyword, "is"))
+        {
+            Consume(TokenType.Keyword, "is");
+            var inheritedType = Consume(TokenType.Inherited);
+            typeNode.InheritedType = inheritedType.Value;
+        }
 
         Consume(TokenType.Delimiter, "{");
 
@@ -51,7 +58,7 @@ public class Parser
             typeNode.Properties.Add(property);
         }
         
-        Consume(TokenType.Delimiter, "{");
+        Consume(TokenType.Delimiter, "}");
 
         return typeNode;
     }
@@ -62,11 +69,18 @@ public class Parser
         var name = Consume(TokenType.Identifier).Value;
         return new PropertyNode { Name = name, DataType = dataType };
     }
-
+    
     private Token Consume(TokenType expectedType, string expectedValue = null)
     {
         var token = _currentToken;
+        if(expectedValue is not null && expectedValue != token.Value)
+            throw new Exception($"Expected {expectedValue} but got {token.Value}");
         Advance();
-        return token;
+        return token with { Type = expectedType };
+    }
+
+    private (TokenType, string) CheckNextToken()
+    {
+        return (_currentToken.Type, _currentToken.Value);
     }
 }

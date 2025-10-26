@@ -1,6 +1,6 @@
 ﻿namespace SkyStruct.Lexer;
 
-public class Token
+public record Token
 {
     public Token(TokenType type, string value)
     {
@@ -18,5 +18,6 @@ public enum TokenType
     Identifier,
     DataType,
     Delimiter,
-    EndOfInput
+    EndOfInput,
+    Inherited
 }
