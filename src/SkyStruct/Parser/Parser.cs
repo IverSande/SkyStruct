@@ -19,7 +19,7 @@ public class Parser
         if (_tokens.MoveNext())
             _currentToken = _tokens.Current;
         else
-            _currentToken = new Token(TokenType.EndOfInput, "END");
+            _currentToken = new Token(TokenType.EndOfInput, "END", -1, -1, -1);
     }
 
     public List<TypeNode> Parse()
@@ -73,8 +73,8 @@ public class Parser
     private Token Consume(TokenType expectedType, string expectedValue = null)
     {
         var token = _currentToken;
-        if(expectedValue is not null && expectedValue != token.Value)
-            throw new Exception($"Expected {expectedValue} but got {token.Value}");
+        //if(expectedValue is not null && expectedValue != token.Value)
+        //    throw new Exception($"Expected {expectedValue} but got {token.Value}");
         Advance();
         return token with { Type = expectedType };
     }

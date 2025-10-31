@@ -16,12 +16,15 @@ public class Lexer
 
     public IEnumerable<Token> Tokenize()
     {
-        var tokenValue = new List<char>();
+        var tokenValue = new List<(char, int)>();
         int intChar;
+        var currentLine = 1;
+        var currentColumn = 1;
 
         while ((intChar = _input.Read()) != -1)
         {
             var currentChar = (char) intChar;
+            currentColumn++;
             
             switch (_currentState)
             {
@@ -33,19 +36,21 @@ public class Lexer
                             break;
                         case '{' : 
                             _currentState = LexerState.StartType;
-                            tokenValue.Add(currentChar);
+                            tokenValue.Add((currentChar, currentColumn));
                             break;
                         case '}' : 
                             _currentState = LexerState.EndType;
-                            tokenValue.Add(currentChar);
+                            tokenValue.Add((currentChar, currentColumn));
                             break;
                         case '\r':
                             break;
                         case '\n':
+                            currentLine++;
+                            currentColumn = 1;
                             break;
                         default :
                             _currentState = LexerState.Identifier; 
-                            tokenValue.Add(currentChar);
+                            tokenValue.Add((currentChar, currentColumn));
                             break;
                     }
                     break;
@@ -55,34 +60,34 @@ public class Lexer
                     if (!char.IsWhiteSpace(currentChar))
                     {
                         _currentState = LexerState.Default;
-                        tokenValue.Add(currentChar);
+                        tokenValue.Add((currentChar, currentColumn));
                     }
                     break;
                 
                 case LexerState.Identifier:
                     if (char.IsLetterOrDigit(currentChar))
                     {
-                        tokenValue.Add(currentChar);
+                        tokenValue.Add((currentChar, currentColumn));
                     }
                     else
                     {
-                        var token = RecognizeToken(new string(tokenValue.ToArray()));
+                        var token = RecognizeToken(tokenValue, currentLine);
                         if(token is not null)
                             yield return token;
                         tokenValue.Clear();
                         if(IsDelimiter(currentChar))
-                            tokenValue.Add(currentChar);
+                            tokenValue.Add((currentChar, currentColumn));
                         _currentState = LexerState.Default;
                     }
                     break;
                 case LexerState.StartType:
                     _currentState = LexerState.Default;
-                    yield return new Token(TokenType.Delimiter, new string(tokenValue.ToArray()));
+                    yield return RecognizeToken(tokenValue, currentLine)!;
                     tokenValue.Clear();
                     break;
                 case LexerState.EndType:
                     _currentState = LexerState.Default;
-                    yield return new Token(TokenType.Delimiter, new string(tokenValue.ToArray()));
+                    yield return RecognizeToken(tokenValue, currentLine)!;
                     tokenValue.Clear();
                     break;
             }
@@ -92,20 +97,24 @@ public class Lexer
         // Handle the last token if any after exiting the loop
         if (tokenValue.Count > 0)
         {
-            var idToken = new string(tokenValue.ToArray());
-            var token = RecognizeToken(idToken);
+            var token = RecognizeToken(tokenValue, currentLine);
             if(token is not null)
                 yield return token;
         }
     
-        yield return new Token(TokenType.EndOfInput, "END");
     }
     
-    private Token? RecognizeToken(string value)
+    private Token? RecognizeToken(List<(char, int)> values, int lineNumber)
     {
-        if (IsThrowAway(value))
-            return null;
-        return IsKeyword(value) ? new Token(TokenType.Keyword, value) : new Token(TokenType.Identifier, value);
+        var value = values.Aggregate("", (acc, cur) => acc + cur.Item1);
+        var firstCharColumn = values.First().Item2;
+        var lastCharColumn = values.Last().Item2;
+
+        var tokenType = ResolveTokenType(value);
+
+        return tokenType is null ? null : new Token((TokenType)tokenType, value, lineNumber, firstCharColumn, lastCharColumn);
+
+        //return IsKeyword(value) ? new Token(TokenType.Keyword, value, lineNumber, firstCharColumn, lastCharColumn) : new Token(TokenType.Identifier, value, lineNumber, firstCharColumn, lastCharColumn);
     }
     
     private bool IsThrowAway(string value) =>
@@ -116,5 +125,16 @@ public class Lexer
     
     private bool IsKeyword(string value) =>
         value == "Define" || value == "is";
-    
+
+    private TokenType? ResolveTokenType(string value) => value switch
+    {
+        "\r" => null,
+        "\n" => null,
+        "{" => TokenType.Delimiter,
+        "}" => TokenType.Delimiter,
+        "Define" => TokenType.Keyword,
+        "is" => TokenType.Keyword,
+        _ => TokenType.Identifier
+    };
+
 }
