@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyStruct.Tests", "tests\Sk
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C0E29FB2-0ECD-4BC8-B0FB-6CDD30D12155}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyStruct.Lsp", "SkyStruct.Lsp\SkyStruct.Lsp.csproj", "{11F92925-8B29-4390-97D9-EED316F47C34}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyStruct.Lsp", "src\SkyStruct.Lsp\SkyStruct.Lsp.csproj", "{11F92925-8B29-4390-97D9-EED316F47C34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

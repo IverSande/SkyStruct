@@ -19,7 +19,7 @@ public class Lexer
         var tokenValue = new List<(char, int)>();
         int intChar;
         var currentLine = 1;
-        var currentColumn = 1;
+        var currentColumn = 0;
 
         while ((intChar = _input.Read()) != -1)
         {
@@ -46,7 +46,7 @@ public class Lexer
                             break;
                         case '\n':
                             currentLine++;
-                            currentColumn = 1;
+                            currentColumn = 0;
                             break;
                         default :
                             _currentState = LexerState.Identifier; 
@@ -113,8 +113,6 @@ public class Lexer
         var tokenType = ResolveTokenType(value);
 
         return tokenType is null ? null : new Token((TokenType)tokenType, value, lineNumber, firstCharColumn, lastCharColumn);
-
-        //return IsKeyword(value) ? new Token(TokenType.Keyword, value, lineNumber, firstCharColumn, lastCharColumn) : new Token(TokenType.Identifier, value, lineNumber, firstCharColumn, lastCharColumn);
     }
     
     private bool IsThrowAway(string value) =>
