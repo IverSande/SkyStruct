@@ -10,6 +10,7 @@ public record Token
         ColumnStart = columnStart;
         ColumnEnd = columnEnd;
     }
+    
 
     public TokenType Type { get; set; }
     public string Value { get; set; }

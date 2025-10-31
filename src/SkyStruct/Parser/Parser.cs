@@ -6,10 +6,12 @@ namespace SkyStruct.Parser;
 public class Parser
 {
     private readonly IEnumerator<Token> _tokens;
-    private Token _currentToken = null!;
+    private Token _currentToken;
+    private bool _finished;
     
     public Parser(IEnumerable<Token> tokens)
     {
+        _finished = false;
         _tokens = tokens.GetEnumerator();
         Advance();
     }
@@ -19,14 +21,14 @@ public class Parser
         if (_tokens.MoveNext())
             _currentToken = _tokens.Current;
         else
-            _currentToken = new Token(TokenType.EndOfInput, "END", -1, -1, -1);
+            _finished = true;
     }
 
     public List<TypeNode> Parse()
     {
         var dataContracts = new List<TypeNode>();
 
-        while (_currentToken.Type != TokenType.EndOfInput)
+        while (!_finished)
         {
             var dataContract = ParseType();
             dataContracts.Add(dataContract);
@@ -70,11 +72,11 @@ public class Parser
         return new PropertyNode { Name = name, DataType = dataType };
     }
     
-    private Token Consume(TokenType expectedType, string expectedValue = null)
+    private Token Consume(TokenType expectedType, string? expectedValue = null)
     {
         var token = _currentToken;
-        //if(expectedValue is not null && expectedValue != token.Value)
-        //    throw new Exception($"Expected {expectedValue} but got {token.Value}");
+        if(expectedValue is not null && expectedValue != token.Value)
+            throw new Exception($"Expected {expectedValue} but got {token.Value}");
         Advance();
         return token with { Type = expectedType };
     }
