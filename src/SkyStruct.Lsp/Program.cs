@@ -10,7 +10,7 @@ internal static class Program
 
         using var reader = new StreamReader(stdin);
         using var writer = new StreamWriter(stdout);
-        //var languageServer = new LanguageServer(reader, writer);
-        //languageServer.Start();
+        var languageServer = new LanguageServer(reader, writer);
+        languageServer.Start();
     }
 }
