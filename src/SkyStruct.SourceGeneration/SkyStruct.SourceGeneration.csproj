@@ -23,10 +23,9 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="5.0.0" PrivateAssets="all" />
       <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0" PrivateAssets="all" />
-      <PackageReference Include="SkyStruct" Version="1.0.0" PrivateAssets="all" />
     </ItemGroup>
-    
     <ItemGroup>
+        <PackageReference Include="SkyStruct" Version="1.0.0" PrivateAssets="all" />
         <None Include="$(OutputPath)\SkyStruct.dll"
               Pack="true"
               PackagePath="analyzers/dotnet/cs" />

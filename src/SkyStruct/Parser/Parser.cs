@@ -75,10 +75,10 @@ public class Parser
     private Token Consume(TokenType expectedType, string? expectedValue = null)
     {
         var token = _currentToken;
-        if(expectedValue is not null && expectedValue != token.Value)
-            throw new Exception($"Expected {expectedValue} but got {token.Value}");
+        //if(expectedValue is not null && expectedValue != token.Value)
+        //    throw new Exception($"Expected {expectedValue} but got {token.Value}");
         Advance();
-        return token with { Type = expectedType };
+        return token; // with { Type = expectedType };
     }
 
     private (TokenType, string) CheckNextToken()
