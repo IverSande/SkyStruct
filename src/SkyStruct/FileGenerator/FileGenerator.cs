@@ -9,7 +9,7 @@ public class FileGenerator : IFileGenerator
 
     public async void GenerateFile(string fileData, string fileName)
     {
-        await using var outputFile = new StreamWriter(fileName);
+        using var outputFile = new StreamWriter(fileName);
         await outputFile.WriteAsync(fileData);
     }
     
