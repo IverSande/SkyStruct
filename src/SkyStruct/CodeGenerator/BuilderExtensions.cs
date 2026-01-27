@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using Microsoft.Extensions.Primitives;
 using SkyStruct.Parser;
 
 namespace SkyStruct.CodeGenerator;

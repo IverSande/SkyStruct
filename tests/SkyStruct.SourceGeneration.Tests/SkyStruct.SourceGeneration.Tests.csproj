@@ -2,27 +2,24 @@
 
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
-
+    
     <ItemGroup>
         <PackageReference Include="MSTest.TestFramework" Version="4.0.2" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
         <PackageReference Include="MSTest.TestAdapter" Version="4.0.2" />
+        <PackageReference Include="SkyStruct.SourceGeneration" Version="1.0.0" PrivateAssets="all" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="Files\TestFile.skystruct" />
-      <EmbeddedResource Include="Files\TestFile.skystruct">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <AdditionalFiles Include="**\*.skystruct" />
+        <AdditionalFiles Include="**\*.skystruct" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\SkyStruct\SkyStruct.csproj" />
+        <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting"/>
     </ItemGroup>
-
 
 </Project>
