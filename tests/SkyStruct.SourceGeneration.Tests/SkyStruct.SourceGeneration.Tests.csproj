@@ -11,7 +11,10 @@
         <PackageReference Include="MSTest.TestFramework" Version="4.0.2" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
         <PackageReference Include="MSTest.TestAdapter" Version="4.0.2" />
-        <PackageReference Include="SkyStruct.SourceGeneration" Version="1.0.0" PrivateAssets="all" />
+        <PackageReference Include="SkyStruct.SourceGeneration" Version="1.0.0" PrivateAssets="all">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
@@ -20,6 +23,14 @@
 
     <ItemGroup>
         <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\SkyStruct.SourceGeneration\SkyStruct.SourceGeneration.csproj" IsAnalyzer="true">
+            <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+            <OutputItemType>Analyzer</OutputItemType>
+            <PrivateAssets>all</PrivateAssets>
+        </ProjectReference>
     </ItemGroup>
 
 </Project>

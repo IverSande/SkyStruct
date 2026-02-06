@@ -6,8 +6,11 @@
 Define Employee is Person { 
     Text EmployeeID 
     Text EmployeeID2
-    Text EmployeeID3
     Text Title 
     Decimal Salary
     Person Boss
+}
+
+Define X {
+    Text Xy
 }
