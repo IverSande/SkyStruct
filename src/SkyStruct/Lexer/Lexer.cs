@@ -75,8 +75,11 @@ public class Lexer
                         if(token is not null)
                             yield return token;
                         tokenValue.Clear();
-                        if(IsDelimiter(currentChar))
+                        if (IsDelimiter(currentChar))
+                        {
                             tokenValue.Add((currentChar, currentColumn));
+                            yield return RecognizeToken(tokenValue, currentLine)!;
+                        }
                         _currentState = LexerState.Default;
                     }
                     break;
@@ -128,11 +131,10 @@ public class Lexer
     {
         "\r" => null,
         "\n" => null,
-        "{" => TokenType.Delimiter,
-        "}" => TokenType.Delimiter,
-        "Define" => TokenType.Keyword,
-        "is" => TokenType.Keyword,
-        _ => TokenType.Identifier
+        "{" or "}" => TokenType.Delimiter,
+        "Define" or "is" => TokenType.Keyword,
+        "optional" or "required" or "list" => TokenType.Constraint,
+        _ => TokenType.NotResolved
     };
 
 }

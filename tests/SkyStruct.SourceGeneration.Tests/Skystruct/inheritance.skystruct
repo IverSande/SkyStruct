@@ -5,12 +5,12 @@
 
 Define Employee is Person { 
     Text EmployeeID 
-    Text EmployeeID2
     Text Title 
     Decimal Salary
     Person Boss
 }
 
-Define X {
-    Text Xy
+Define Payment {
+    Text PaymentId
+    Text PaymentOwner 
 }

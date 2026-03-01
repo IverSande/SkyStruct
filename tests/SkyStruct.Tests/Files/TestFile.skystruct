@@ -1,9 +1,9 @@
-﻿Define Person { 
+﻿Define Person{ 
     Text Name 
     Number Age 
 } 
 
-Define Employee is Person { 
+Define Employee is Person {
     Text EmployeeID 
     Text Title 
     Decimal Salary

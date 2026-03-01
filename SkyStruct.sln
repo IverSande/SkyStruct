@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyStruct.Lsp", "src\SkyStr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyStruct.SourceGeneration.Tests", "tests\SkyStruct.SourceGeneration.Tests\SkyStruct.SourceGeneration.Tests.csproj", "{27135446-29E6-4D67-9031-8FACE122403A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyStruct.Json", "SkyStruct.Json\SkyStruct.Json.csproj", "{8C5A25B8-4DD7-40E4-B387-D8E331D8B48B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{27135446-29E6-4D67-9031-8FACE122403A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27135446-29E6-4D67-9031-8FACE122403A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27135446-29E6-4D67-9031-8FACE122403A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C5A25B8-4DD7-40E4-B387-D8E331D8B48B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C5A25B8-4DD7-40E4-B387-D8E331D8B48B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C5A25B8-4DD7-40E4-B387-D8E331D8B48B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C5A25B8-4DD7-40E4-B387-D8E331D8B48B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{790088F3-0926-4AA1-B9A8-54BB31EEC0D2} = {C0E29FB2-0ECD-4BC8-B0FB-6CDD30D12155}

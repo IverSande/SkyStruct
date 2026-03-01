@@ -26,5 +26,7 @@ public enum TokenType
     DataType,
     Delimiter,
     EndOfInput,
-    Inherited
+    Inherited,
+    Constraint,
+    NotResolved
 }

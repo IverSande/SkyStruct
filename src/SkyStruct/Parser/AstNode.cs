@@ -13,4 +13,13 @@ public class PropertyNode : AstNode
 {
     public string Name { get; set; }
     public string DataType { get; set; }
+    public List<Constraint> Constraints { get; set; } = [];
+}
+
+public enum Constraint
+{
+    Required,
+    Optional,
+    List,
+    //More constraints    
 }

@@ -8,6 +8,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=35bfe795_002D9b72_002D4bcc_002Db39f_002D86f8df6f4de2/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test_TestFile" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::790088F3-0926-4AA1-B9A8-54BB31EEC0D2::net10.0::SkyStruct.Tests.EndToEnd&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::27135446-29E6-4D67-9031-8FACE122403A::net10.0::SkyStruct.SourceGeneration.Tests.InheritanceTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
