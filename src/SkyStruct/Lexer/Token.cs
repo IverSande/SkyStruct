@@ -1,22 +1,12 @@
 ﻿namespace SkyStruct.Lexer;
 
-public record Token
+public record Token(TokenType Type, string Value, int LineNumber, int ColumnStart, int ColumnEnd)
 {
-    public Token(TokenType type, string value, int lineNumber, int columnStart, int columnEnd)
-    {
-        Type = type;
-        Value = value;
-        LineNumber = lineNumber;
-        ColumnStart = columnStart;
-        ColumnEnd = columnEnd;
-    }
-    
-
-    public TokenType Type { get; set; }
-    public string Value { get; set; }
-    public int LineNumber { get; set; }
-    public int ColumnStart { get; set; }
-    public int ColumnEnd { get; set; }
+    public TokenType Type { get; set; } = Type;
+    public string Value { get; set; } = Value;
+    public int LineNumber { get; set; } = LineNumber;
+    public int ColumnStart { get; set; } = ColumnStart;
+    public int ColumnEnd { get; set; } = ColumnEnd;
 }
 
 public enum TokenType
