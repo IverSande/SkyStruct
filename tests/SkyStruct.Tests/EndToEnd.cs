@@ -19,9 +19,8 @@ public class EndToEnd
 
         var codeGenerator = new CodeGenerator.Builder(ast, "HolyNamespace");
         var code = codeGenerator.BuildFile();
-
-        var fileGenerator = new FileGenerator.FileGenerator();
-        fileGenerator.GenerateFile(code, "TestFileGenerated.cs");
+        
+        Assert.IsNotEmpty(code);
 
         return Task.CompletedTask;
     }

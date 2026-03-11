@@ -44,6 +44,8 @@ public class Lexer
                             break;
                         case '\r':
                             break;
+                        case '\t':
+                            break;
                         case '\n':
                             currentLine++;
                             currentColumn = 0;
@@ -130,6 +132,7 @@ public class Lexer
     private TokenType? ResolveTokenType(string value) => value switch
     {
         "\r" => null,
+        "\t" => null,
         "\n" => null,
         "{" or "}" => TokenType.Delimiter,
         "Define" or "is" => TokenType.Keyword,

@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MSTest" Version="4.0.1"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\SkyStruct\SkyStruct.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="TestFiles\OneType100Rows.skystruct" />
+      <EmbeddedResource Include="TestFilesOneType\OneType100Rows.skystruct">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="TestFiles\OneType1000Rows.skystruct" />
+      <EmbeddedResource Include="TestFilesOneType\OneType1000Rows.skystruct">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="TestFiles\OneType10000Rows.skystruct" />
+      <EmbeddedResource Include="TestFilesOneType\OneType10000Rows.skystruct">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="TestFiles\OneType100000Rows.skystruct" />
+      <EmbeddedResource Include="TestFilesOneType\OneType100000Rows.skystruct">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="TestFileXTypesOneField\100TypesOneField.skystruct" />
+      <EmbeddedResource Include="TestFilesXTypesOneField\100TypesOneField.skystruct">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="TestFilesXTypesOneField\1000TypesOneField.skystruct" />
+      <EmbeddedResource Include="TestFilesXTypesOneField\1000TypesOneField.skystruct">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="TestFilesXTypesOneField\10000TypesOneField.skystruct" />
+      <EmbeddedResource Include="TestFilesXTypesOneField\10000TypesOneField.skystruct">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="TestFilesXTypesOneField\100000TypesOneField.skystruct" />
+      <EmbeddedResource Include="TestFilesXTypesOneField\100000TypesOneField.skystruct">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
+
+</Project>
