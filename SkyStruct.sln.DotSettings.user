@@ -15,8 +15,17 @@
     &lt;TestId&gt;MSTest::E1DA8554-35BC-4048-9C08-7676EB0D37BA::net10.0::SkyStruct.Tests.Performance.PerformanceTests.PerformanceTest_OneType&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;MSTest::E1DA8554-35BC-4048-9C08-7676EB0D37BA::net10.0::SkyStruct.Tests.Performance.PerformanceTests.PerformanceTest_XTypes_OneField&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;MSTest::E1DA8554-35BC-4048-9C08-7676EB0D37BA::net10.0::SkyStruct.Tests.Performance.PerformanceTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::790088F3-0926-4AA1-B9A8-54BB31EEC0D2::net10.0::SkyStruct.Tests.Lexer.LexerTests.RecognizeTokensAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::790088F3-0926-4AA1-B9A8-54BB31EEC0D2::net10.0::SkyStruct.Tests.Lexer.LexerTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::790088F3-0926-4AA1-B9A8-54BB31EEC0D2::net10.0::SkyStruct.Tests.Parser.ParserTests.ParseTokensAsync_HappyPath_BasicDefinition&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
+	
+	
+	
+	
+	
 	
 	
 	

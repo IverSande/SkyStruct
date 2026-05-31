@@ -11,10 +11,10 @@ public class EndToEnd
     {
         var fileStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("SkyStruct.Tests.Files.TestFile.skystruct");
 
-        var lexer = new Lexer.Lexer(new StreamReader(fileStream!), new CancellationToken());
+        var lexer = new SkyStruct.Lexer.Lexer(new StreamReader(fileStream!), new CancellationToken());
         var tokens = lexer.Tokenize().ToList();
 
-        var parser = new Parser.Parser(tokens);
+        var parser = new SkyStruct.Parser.Parser(tokens);
         var ast = parser.Parse();
 
         var codeGenerator = new CodeGenerator.Builder(ast, "HolyNamespace");

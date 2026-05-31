@@ -85,12 +85,7 @@ public class Lexer
                         _currentState = LexerState.Default;
                     }
                     break;
-                case LexerState.StartType:
-                    _currentState = LexerState.Default;
-                    yield return RecognizeToken(tokenValue, currentLine)!;
-                    tokenValue.Clear();
-                    break;
-                case LexerState.EndType:
+                case LexerState.StartType or LexerState.EndType:
                     _currentState = LexerState.Default;
                     yield return RecognizeToken(tokenValue, currentLine)!;
                     tokenValue.Clear();
@@ -136,7 +131,7 @@ public class Lexer
         "\n" => null,
         "{" or "}" => TokenType.Delimiter,
         "Define" or "is" => TokenType.Keyword,
-        "optional" or "required" or "list" => TokenType.Constraint,
+        "optional" or "required" or "list" or "decimal" => TokenType.Constraint,
         _ => TokenType.NotResolved
     };
 

@@ -21,5 +21,5 @@ public enum Constraint
     Required,
     Optional,
     List,
-    //More constraints    
+    Decimal
 }

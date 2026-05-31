@@ -68,11 +68,7 @@ public class Parser
     private PropertyNode ParseProperty()
     {
 
-        var constraints = CheckNextToken() switch
-        {
-            (TokenType.Constraint, _) => ConsumeConstraints(),
-            _ => []
-        };
+        var constraints = ConsumeConstraints();
         
         var dataType = Consume(TokenType.DataType).Value;
         var name = Consume(TokenType.Identifier).Value;
@@ -93,8 +89,20 @@ public class Parser
 
     private List<Constraint> ConsumeConstraints()
     {
-        //Todo: implement constraints
-        return [];
+        var constraints = new List<Constraint>();
+        while (CheckNextToken().Item1 == TokenType.Constraint)
+        {
+            var constraint = CheckNextToken().Item2 switch
+            {
+                "optional" => Constraint.Optional,
+                "list" => Constraint.List,
+                "required" => Constraint.Required,
+                "decimal" => Constraint.Decimal,
+                _ => throw new Exception($"Expected {TokenType.Constraint} but found {CheckNextToken().Item2}")
+            };
+            constraints.Add(constraint);
+        }
+        return constraints;
     }
 
     private (TokenType, string) CheckNextToken()

@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyStruct.Lsp", "src\SkyStr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyStruct.SourceGeneration.Tests", "tests\SkyStruct.SourceGeneration.Tests\SkyStruct.SourceGeneration.Tests.csproj", "{27135446-29E6-4D67-9031-8FACE122403A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyStruct.Json", "SkyStruct.Json\SkyStruct.Json.csproj", "{8C5A25B8-4DD7-40E4-B387-D8E331D8B48B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyStruct.Json", "src\SkyStruct.Json\SkyStruct.Json.csproj", "{8C5A25B8-4DD7-40E4-B387-D8E331D8B48B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyStruct.Tests.Performance", "tests\SkyStruct.Tests.Performance\SkyStruct.Tests.Performance.csproj", "{E1DA8554-35BC-4048-9C08-7676EB0D37BA}"
 EndProject

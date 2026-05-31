@@ -8,11 +8,6 @@ public sealed class Generator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        //if (!System.Diagnostics.Debugger.IsAttached)
-        //{
-        //    System.Diagnostics.Debugger.Launch();
-        //}
-        // additional files
         var textFiles = context.AdditionalTextsProvider
             .Where(file => file.Path.EndsWith(".skystruct"));
         

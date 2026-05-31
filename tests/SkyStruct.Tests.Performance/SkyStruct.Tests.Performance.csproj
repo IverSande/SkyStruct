@@ -49,7 +49,24 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="TestFilesXTypesOneField\100000TypesOneField.skystruct" />
-      <EmbeddedResource Include="TestFilesXTypesOneField\100000TypesOneField.skystruct">
+      <None Remove="TestFilesXTypesXFields\10Types10Fields.skystruct" />
+      <EmbeddedResource Include="TestFilesXTypesXFields\10Types10Fields.skystruct">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="TestFilesXTypesXFields\100Types100Fields.skystruct" />
+      <EmbeddedResource Include="TestFilesXTypesXFields\100Types100Fields.skystruct">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="TestFilesXTypesXFields\1000Types1000Fields.skystruct" />
+      <EmbeddedResource Include="TestFilesXTypesXFields\1000Types1000Fields.skystruct">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="TestFilesXTypesXFields\315Types315Fields.skystruct" />
+      <EmbeddedResource Include="TestFilesXTypesXFields\315Types315Fields.skystruct">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="TestFilesXTypesOneField\33334TypesOneField.skystruct" />
+      <EmbeddedResource Include="TestFilesXTypesOneField\33334TypesOneField.skystruct">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
     </ItemGroup>

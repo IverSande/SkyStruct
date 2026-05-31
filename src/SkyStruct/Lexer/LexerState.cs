@@ -3,7 +3,6 @@
 public enum LexerState
 { 
         Default,
-        Keyword,
         StartType,
         EndType,
         Identifier, 

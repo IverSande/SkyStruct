@@ -5,34 +5,67 @@ namespace SkyStruct.CodeGenerator;
 
 public static class BuilderExtensions
 {
-    public static StringBuilder BuildNamespace(this StringBuilder builder, string @namespace) => 
-        builder
-            .Append("namespace " + @namespace + ";")
-            .AppendLine();
-
-    public static StringBuilder BuildTypeNode(this StringBuilder builder, TypeNode type)
+    extension(StringBuilder builder)
     {
-        builder.Append("public class " + type.Name);
-        if (type.InheritedType is not null)
-        {
-            builder.Append(" : " + type.InheritedType);
-        }
-        builder.AppendLine().Append('{').AppendLine();
-        
-        foreach (var property in type.Properties)
-        {
-            builder.Append("  public " + property.DataType.ToDotNetDataType() + " " + property.Name + " { get; set; }").AppendLine();
-        }
-        builder.Append('}').AppendLine();
+        public StringBuilder BuildNamespace(string @namespace) => 
+            builder
+                .Append("namespace " + @namespace + ";")
+                .AppendLine();
 
-        return builder;
+        public StringBuilder BuildTypeNode(TypeNode type)
+        {
+            builder.Append("public class " + type.Name);
+            if (type.InheritedType is not null)
+            {
+                builder.Append(" : " + type.InheritedType);
+            }
+            builder.AppendLine().Append('{').AppendLine();
+        
+            foreach (var property in type.Properties)
+            {
+                builder.Append("  public " + property.ToDotNetDataType() + " " + property.Name + " { get; set; }").AppendLine();
+            }
+            builder.Append('}').AppendLine();
+
+            return builder;
+        }
     }
 
-    private static string ToDotNetDataType(this string type) => type switch
+    private static string ToDotNetDataType(this PropertyNode type) => 
+        ToConstrainedDotNetDataType(type.DataType, type.Constraints);
+
+    extension(string type)
     {
-        "Text" => "string",
-        "Number" => "int",
-        "Decimal" => "decimal",
-        _ => type
-    };
+        private string ToConstrainedDotNetDataType(List<Constraint> constraints)
+        {
+            var dotnetType = type.ToDotNetDataType(constraints.FirstOrDefault(c => c == Constraint.Decimal));
+        
+            if (constraints.Contains(Constraint.List))
+                dotnetType = dotnetType.AddList();
+            if (constraints.Contains(Constraint.Required))
+                dotnetType = dotnetType.AddRequired();
+            if (constraints.Contains(Constraint.Optional))
+                dotnetType = dotnetType.AddOptional();
+
+            return dotnetType;
+        }
+
+        private string AddList() =>
+            "List<" + type + ">";
+
+        private string AddRequired() =>
+            "required" + type;
+
+        private string AddOptional() =>
+            type + "?";
+
+        private string ToDotNetDataType(Constraint? constraint = null) => (type, constraint) switch
+        {
+            ("Text", _) => "string",
+            ("Number", Constraint.Decimal) => "decimal",
+            ("Number", _) => "long",
+            ("Bool", _) => "bool",
+            _ => type
+        };
+    }
 }
